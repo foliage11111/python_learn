@@ -1,7 +1,113 @@
-s=4
-f=8
 
-j=[1,2,3,4,5,6,7,8]
-for d in range(s):
- for  k in range(len(j)):   #ç”¨rangeå’Œç›´æŽ¥å†™jï¼Œä¼šå¯¼è‡´kçš„åˆå§‹å€¼ä¸åŒï¼Œéœ€è¦ç†è§£forçš„å‡½æ•°æ€Žä¹ˆå†™çš„
-  print j[k]
+#coding=GBK
+# 1. ³ÌÐòÔËÐÐºó¿ÉÒÔÑ­»·ÊäÈë²Ù×÷ÃüÁî
+# 2. ²Ù×÷ÃüÁîÊäÈë0£¬´òÓ¡³ö³ÌÐò°ïÖúÐÅÏ¢£¬¼´Ã¿¸ö²Ù×÷ÃüÁîµÄ½éÉÜ
+# 3. ²Ù×÷ÃüÁîÊäÈë1£¬´òÓ¡³ö³ÌÐòÖÐ´æ´¢µÄËùÓÐ¿Î³ÌID¼°¿Î³ÌÃû³Æ
+# 4. ÊäÈë2£¬´òÓ¡³ö¿Î³ÌÊýÁ¿
+# 5. ÊäÈë3£¬´òÓ¡³ö×î³¤µÄ¿Î³ÌÃû³ÆÓëÆäID
+# 6. ÊäÈë4£¬É¾³ý×îºóÒ»¸ö¿Î³Ì²¢´òÓ¡³öÊ£Óà¿Î³ÌÊýÁ¿
+# 7. ÊäÈë5£¬ÍË³ö³ÌÐò
+# Çë¶ÀÁ¢Íê³É³ÌÐò£¬ÓÃµ½µÄÖªÊ¶µã¶¼ÔÚÊéÖÐ¿ÉÒÔÕÒµ½£¬Óöµ½ÎÊÌâÇë¼°Ê±ÌáÎÊ£¬ÓÅÐãµÄ×÷Òµ»áÕ¹Ê¾ÔÚÏÂÖÜµÄÊµÑéÎÄµµÖÐ¡£
+# 3.2 ÊµÏÖÌáÊ¾
+# ¿ÉÒÔÊ¹ÓÃÏÂÃæµÄÌáÊ¾½øÐÐ´úÂë±àÐ´£¬Ò²¿ÉÒÔ°´ÕÕ×Ô¼ºµÄÀí½âÀ´ÊµÏÖÏîÄ¿£º
+# 1. Ê¹ÓÃwhileÀ´ÊµÏÖ½ÓÊÜÊäÈëµÄÖ÷Ñ­»·
+# 2. Ê¹ÓÃinput()»ñÈ¡ÃüÁîÊäÈë
+# 3. Ê¹ÓÃprintf()´òÓ¡ÃüÁîÊä³ö
+# 4. Ê¹ÓÃif-elif-elseÀ´´¦Àí²»Í¬µÄÃüÁîÊäÈë
+# 5. ¶¨Òå¿Î³ÌÁÐ±ícourses£¬Ã¿¸öÔªËØ°üº¬¿Î³ÌIDºÍ¿Î³ÌÃû³Æ
+# 6. ¶¨Òå¿Î³ÌÊý×é²¢Ê¹ÓÃÏÂÊö¿Î³ÌÃû½øÐÐ³õÊ¼»¯£¬ID¿ÉËæÒâ£ºLinux,C++,HTML,HTML5,NodeJS,Shell,PythonµÈ¡£
+# 7. Ê¹ÓÃfor»òwhile·ÃÎÊ¿Î³ÌÁÐ±í²¢ÊµÏÖ´òÓ¡ËùÓÐ¿Î³ÌID¼°Ãû³Æ£¬¼´²Ù×÷ÃüÁî1
+# 8. Ê¹ÓÃÁÐ±í·½·¨»ñÈ¡²¢´òÓ¡courses³¤¶È£¬ÊµÏÖ²Ù×÷ÃüÁî2
+# 9. Ê¹ÓÃfor»òwhile±éÀú¿Î³ÌÁÐ±í£¬Ê¹ÓÃ×Ö·û´®·½·¨²éÕÒ×î³¤µÄ¿Î³ÌÃû³Æ£¬ÊµÏÖÃüÁî3
+# 10. Ê¹ÓÃÁÐ±í·½·¨É¾³ýÔªËØ£¬ÊµÏÖ²Ù×÷ÃüÁî4
+# 11. ÉèÖÃwhileÑ­»·µÄÌõ¼þÀ´ÊµÏÖbreakÌø³öÑ­»·£¬ÊµÏÖ²Ù×÷ÃüÁî5
+#
+# ´úÂëÇë·Åµ½ÎÄ¼þ¼Ð/home/shiyanlou/Code/shiyanlou_cs421/lab1/ÖÐ²¢Ìá½»µ½
+
+# 1. ³ÌÐòÔËÐÐºó¿ÉÒÔÑ­»·ÊäÈë²Ù×÷ÃüÁî
+    # while ÊäÈëµÄÄÚÈÝ²»ÊÇ0-5µÄÊ±ºò£¬²»Í£µÄÒªÇóÊäÈë£¬²¢ÌáÊ¾ÐèÒªÊäÈë0µ½5
+def print_help_info ():
+    print "ÕâÀïÊÇ°ïÖúÐÅÏ¢"
+    print "ÊäÈë1£¬´òÓ¡³ö³ÌÐòÖÐ´æ´¢µÄËùÓÐ¿Î³ÌID¼°¿Î³ÌÃû³Æ"
+    print "ÊäÈë2£¬´òÓ¡³ö¿Î³ÌÊýÁ¿"
+    print "ÊäÈë3£¬´òÓ¡³ö×î³¤µÄ¿Î³ÌÃû³ÆÓëÆäID"
+    print "ÊäÈë4£¬É¾³ý×îºóÒ»¸ö¿Î³Ì²¢´òÓ¡³öÊ£Óà¿Î³ÌÊýÁ¿"
+    print "ÊäÈë5£¬ÍË³ö³ÌÐò"
+
+def any_key_c():
+ print " "
+ print " "
+ if raw_input("ÊäÈë»Ø³µ¼üÖµ¼ÌÐø"):
+  pass
+
+def case_1():
+ #ÊäÈë1£¬´òÓ¡³ö³ÌÐòÖÐ´æ´¢µÄËùÓÐ¿Î³ÌID¼°¿Î³ÌÃû³Æ"
+ print"ÄãÑ¡Ôñ1"
+ any_key_c()
+
+def case_2():
+ #ÊäÈë2£¬´òÓ¡³ö¿Î³ÌÊýÁ¿
+ print "ÄãÑ¡Ôñ2"
+ any_key_c()
+
+def case_3():
+ #ÊäÈë3£¬´òÓ¡³ö×î³¤µÄ¿Î³ÌÃû³ÆÓëÆäID
+ print "ÄãÑ¡Ôñ3"
+ any_key_c()
+
+def case_4():
+ #ÊäÈë4£¬É¾³ý×îºóÒ»¸ö¿Î³Ì²¢´òÓ¡³öÊ£Óà¿Î³ÌÊýÁ¿
+ print "ÄãÑ¡Ôñ4"
+ any_key_c()
+
+def case_5():
+ #ÊäÈë5£¬ÍË³ö³ÌÐò
+ print "ÄãÑ¡Ôñ5"
+ any_key_c()
+
+def case_wrong(str_in):
+ #ÊäÈë´íÎó¾ÍÌáÊ¾
+ print "ÄúÊäÈëµÄ" +str_in +"²»ÊÇÓÐÐ§×Ö·û"
+ any_key_c()
+
+
+def main():
+ condition_1 = True
+ while condition_1:
+   print_help_info()
+   str_choice = raw_input("ÇëÊäÈë1-5Ñ¡ÔñÒ»¸öÖ¸Áî")
+   if str_choice.isdigit():
+     int_choice = int(str_choice)
+     if int_choice < 6 and int_choice > 0:
+       if int_choice==1 :
+         case_1()
+       if int_choice==2 :
+         case_2()
+       if int_choice==3:
+         case_3()
+       if int_choice==4:
+         case_4()
+       if int_choice==5:
+         case_5()
+       continue
+     else :
+           case_wrong (str_choice)
+           continue
+   else :
+     case_wrong (str_choice)
+     continue
+
+
+main()
+
+# 2. ²Ù×÷ÃüÁîÊäÈë0£¬´òÓ¡³ö³ÌÐò°ïÖúÐÅÏ¢£¬¼´Ã¿¸ö²Ù×÷ÃüÁîµÄ½éÉÜ
+
+# 3. ²Ù×÷ÃüÁîÊäÈë1£¬´òÓ¡³ö³ÌÐòÖÐ´æ´¢µÄËùÓÐ¿Î³ÌID¼°¿Î³ÌÃû³Æ
+
+# 4. ÊäÈë2£¬´òÓ¡³ö¿Î³ÌÊýÁ¿
+
+# 5. ÊäÈë3£¬´òÓ¡³ö×î³¤µÄ¿Î³ÌÃû³ÆÓëÆäID
+
+# 6. ÊäÈë4£¬É¾³ý×îºóÒ»¸ö¿Î³Ì²¢´òÓ¡³öÊ£Óà¿Î³ÌÊýÁ¿
+
+# 7. ÊäÈë5£¬ÍË³ö³ÌÐò
