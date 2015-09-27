@@ -26,8 +26,10 @@
 
 # 1. 程序运行后可以循环输入操作命令
     # while 输入的内容不是0-5的时候，不停的要求输入，并提示需要输入0到5
+dict_kecheng={1:'Linux',2:'HTML',3:'HTML5',4:'NodeJS',5:'Shell',6:'Python'}
+
 def print_help_info ():
-    print "这里是帮助信息"
+    print "XXXXX课程管理系统"
     print "输入1，打印出程序中存储的所有课程ID及课程名称"
     print "输入2，打印出课程数量"
     print "输入3，打印出最长的课程名称与其ID"
@@ -37,33 +39,58 @@ def print_help_info ():
 def any_key_c():
  print " "
  print " "
- if raw_input("输入回车键值继续"):
+ if raw_input("输入回车键值继续........."):
   pass
 
 def case_1():
  #输入1，打印出程序中存储的所有课程ID及课程名称"
- print"你选择1"
+ for k in dict_kecheng :
+   print "课程 "+str(k)+" 是： "+dict_kecheng.get(k)
+ print "选课请返回主菜单"
  any_key_c()
 
 def case_2():
  #输入2，打印出课程数量
- print "你选择2"
- any_key_c()
+  print "当前总共有" + str(len(dict_kecheng))+" 门课程。"
+  print "选课请返回主菜单"
+  any_key_c()
 
 def case_3():
  #输入3，打印出最长的课程名称与其ID
  print "你选择3"
+ dic4len={}
+ list4dic_len=[]
+ max_leeson=0
+ if len(dict_kecheng.values()):
+    for v in dict_kecheng.values() :
+      list4dic_len.append(len(str(v)))
+    max_leeson=max(list4dic_len)
+    print "课程名称最长长度为"+str(max_leeson)
+    dic4len=zip(list4dic_len,dict_kecheng.values())
+
+    for k,j in dic4len :
+      if k==max_leeson :
+        print "课程名最长的是" + str(j)
+
+    #print dic4len
+ else :
+  print "没有一个课程"
+ #print dict_kecheng.get(max(dic4len.keys()))
  any_key_c()
 
 def case_4():
  #输入4，删除最后一个课程并打印出剩余课程数量
- print "你选择4"
- any_key_c()
+ del_lesson=dict_kecheng.pop(len(dict_kecheng))
+ print "已删除最后一个课程"+str(del_lesson)
+ case_2()
+
 
 def case_5():
  #输入5，退出程序
- print "你选择5"
+ print "退出程序，处理中。。。。"
+ condition_1=False
  any_key_c()
+ exit()
 
 def case_wrong(str_in):
  #输入错误就提示
@@ -72,6 +99,7 @@ def case_wrong(str_in):
 
 
 def main():
+ #主程序循环，通过if判断是否1-5，并执行对应的程序
  condition_1 = True
  while condition_1:
    print_help_info()
@@ -89,6 +117,7 @@ def main():
          case_4()
        if int_choice==5:
          case_5()
+
        continue
      else :
            case_wrong (str_choice)
@@ -99,15 +128,3 @@ def main():
 
 
 main()
-
-# 2. 操作命令输入0，打印出程序帮助信息，即每个操作命令的介绍
-
-# 3. 操作命令输入1，打印出程序中存储的所有课程ID及课程名称
-
-# 4. 输入2，打印出课程数量
-
-# 5. 输入3，打印出最长的课程名称与其ID
-
-# 6. 输入4，删除最后一个课程并打印出剩余课程数量
-
-# 7. 输入5，退出程序
