@@ -2,7 +2,9 @@
 # -*- coding: utf8 -*-
 __author__ = 'zr'
 
-import class_course
+from class_course import course
+import sys
+sys.path.append('D:\\0tmpper\GitHub\python_learn\shiyanlou')
 
 class database_dict(object):
     "这是一个数据库类型，模拟数据库层，用一个字典记录所有数据，以id作为key，对象作为value"
@@ -11,6 +13,7 @@ class database_dict(object):
 
     def in_up_course(self,course):  ##更新或者插入数据课程
         self.__Data_Course[course.id]=course
+
         return 'done'
 
     def del_course(self,course):

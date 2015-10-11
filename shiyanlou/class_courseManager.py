@@ -1,7 +1,8 @@
 # -*- coding: utf8 -*-
 
-import clas_database
-
+from clas_database import database_dict
+import sys
+sys.path.append('D:\\0tmpper\GitHub\python_learn\shiyanlou')
 class courseManager(object):
     __metaclass__=type
 

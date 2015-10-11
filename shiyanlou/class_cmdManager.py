@@ -1,8 +1,11 @@
 # -*- coding:utf8 -*-
 
-import class_course
-import clas_database
-import class_courseManager
+from class_course import course
+from clas_database import database_dict
+from class_courseManager import courseManager
+
+import sys
+sys.path.append('D:\\0tmpper\GitHub\python_learn\shiyanlou')
 
 class CmdManager(object):
     '界面控制程序的类'

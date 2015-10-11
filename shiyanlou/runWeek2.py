@@ -2,11 +2,12 @@
 # -*- coding: utf8 -*-
 __author__ = 'zr'
 
-import class_cmdManager
-import class_courseManager
-import clas_database
-import class_course
-
+from class_cmdManager import CmdManager
+from class_courseManager import courseManager
+from clas_database import database_dict
+from class_course import course
+import sys
+sys.path.append('D:\\0tmpper\GitHub\python_learn\shiyanlou')
 print "0正在创建数据"
 data_con_dict=database_dict()
 print "1正在加载数据"
