@@ -1,76 +1,128 @@
 # -*- coding: utf8 -*-
 
-from clas_database import database_dict
+from class_course import course
 import sys
+import sqlite3
 sys.path.append('D:\\0tmpper\GitHub\python_learn\shiyanlou')
 class courseManager(object):
     __metaclass__=type
 
-    def print_longest(self,database_dict):
+    def getConnect(self):
+        self.__conn1=sqlite3.connect('D:\\0tmpper\GitHub\python_learn\shiyanlou\lesson3')
+
+    def print_longest(self):
         '打印课程名字最长的那个'
-        id_list=[]
-        max_lex=0
-        if database_dict.get_lenof_course():
-            for k in database_dict.search_course_all():
-                if len(k.name) >0:
-                    if len(k.name)>max_lex:
-                        max_lex=len(k.name)
-                        del id_list[:]
-                        id_list.append(k.name)
-                    elif len(k.name)==max_lex:
-                        id_list.append(k.name)
-            if len(id_list) >0 :
-                print "课程名字最长长度为"+str(max_lex)
-                for i in id_list:
-                    print "课程名字最长的是： "+ str(i)
+        self.getConnect()
+        curs=self.__conn1.cursor()
+        query1="select max(name) from course"     #改成按字符串长度来查找的
+        curs.execute(query1)
+        list1=curs.fetchall()
+        if list1:
+             print "课程名字最长长度为"+str(len(str(list1[0][0])))
+             for i in list1:
+                 print "课程名字最长的是： "+ str(i[0])
+             self.__conn1.close()
         else:
             print "没有课程"
+            self.__conn1.close()
 
 
-    def print_all_course(self,database_dict):
+    def print_all_course(self):
         "获取课程列表"
-        for k in database_dict.search_course_all():
-            print '课程ID为 '+str(k.id)+' ，课程名字为：'+k.name
+        self.getConnect()
+        curs=self.__conn1.cursor()
+        query2='select id,name from course'
+        curs.execute(query2)
+        list1=curs.fetchall()
+        if list1:
+             for k in list1:
+               print '课程ID为 '+str(k[0])+' ，课程名字为：'+ str(k[1])
+             self.__conn1.close()
+        else:
+            self.__conn1.close()
+            print '空课程表'
 
-    def print_course_id(self,database_dict,id):
+
+    def print_course_id(self,id):
         "根据id打印课程"
-        c=database_dict.search_course(id)
-        print  '课程ID为 '+str(c.id)+' ，课程名字为：'+c.name
+        self.getConnect()
+        curs=self.__conn1.cursor()
+        query2="select id,name from course where id="+"\'"+str(id)+"\'"
+        curs.execute(query2)
+        list1=curs.fetchall()
+        if list1:
+             for k in list1:
+                  print '课程ID为 '+str(k[0])+' ，课程名字为：'+str(k[1])
+             self.__conn1.close()
+             return True
+        else:
+            print '没有这门课'
+            self.__conn1.close()
+            return False
 
-    def get_coursenum(self,database_dict):
+    def get_coursenum(self):
         "获取课程数量"
-        print '课程总数量为: '+str(database_dict.get_lenof_course()) + ' 门课'
+        self.getConnect()
+        curs=self.__conn1.cursor()
+        query1="select count(*) from course"
+        curs.execute(query1)
+        list1=curs.fetchall()
+        if list1:
+             for k in list1:
+                   print '课程总数量为: ' +str(k[0]) + ' 门课'
 
-    def in_up_cour(self,database_dict,course):
+        else:
+            print '空课程表'
+        self.__conn1.close()
+
+
+    def in_cour(self,course):
         "插入或者更新课程"
-        if database_dict.search_course(course.id):
-            database_dict.in_up_course(course)
-            print '已添加课程'+course.name
-        else:
-            database_dict.in_up_course(course)
+        if self.print_course_id(course.id):
+            return "已经有了这个值"
+        self.getConnect()
+        curs=self.__conn1.cursor()
+        list1=[course.id,course.name,course.create_date,course.is_in_use]
+        query1="insert into course(id,name,create_date,is_in_use) VALUES (?,?,?,?)"
+        curs.execute(query1,list1)
+        self.__conn1.commit()
+        self.__conn1.close()
+        print '已更新id为'+str(course.id) +' 的课程'
+
+    def up_cour(self,course):
+        "插入或者更新课程"
+        if self.print_course_id(course.id):
+            self.getConnect()
+            curs=self.__conn1.cursor()
+            list1=[course.id,course.name,course.create_date,course.is_in_use]
+            query1="update course SET name=?,create_date=?,is_in_use=? where id=" +"'"+str(course.id)+"'"
+            curs.execute(query1,list1)
+            self.__conn1.commit()
+            self.__conn1.close()
             print '已更新id为'+str(course.id) +' 的课程'
+        else:
+            print "不存在该值"
+            return False
 
-    def pop_newcourse(self,database_dict):
+    def pop_newcourse(self):
         "查找id最大的一个课程，然后删除掉"
-        id_list=[]
-        if database_dict.get_lenof_course():
-            for k in database_dict.search_course_all():
-                id_list.append(k.id)
-            database_dict.del_course_id(max(id_list))
-            print '已删除最新添加课程：'
-        else:
-            print "数据库为空，无课程可以删除"
+        self.getConnect()
+        curs=self.__conn1.cursor()
+        query1="delete  from course where id=(select max(id) from course) "
+        curs.execute(query1)
+        self.__conn1.commit()
+        self.__conn1.close()
+        print '已删除最新添加课程：'
 
 
-
-    def del_course(self,database_dict,id):
+    def del_course(self,id):
         "根据id或者名字删除课程"
-        if id>=0:
-            if database_dict.search_course(id):
-                database_dict.del_course_id(id)
-                print "已删除id为"+str(id)+" 的课程"
-            else:
-                print "不存在id为"+str(id) +" 的课程"
-        else:
-            print "输入有误，无法执行删除"
-
+        if self.print_course_id(id):
+            self.getConnect()
+            curs=self.__conn1.cursor()
+            query1="delete  from course where id="+"'"+str(id)+"'"
+            curs.execute(query1)
+            list1=curs.fetchall()
+            self.__conn1.commit()
+            self.__conn1.close()
+            print "已删除id为"+str(id)+" 的课程"

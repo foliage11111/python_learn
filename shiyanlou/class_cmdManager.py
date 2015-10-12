@@ -5,13 +5,14 @@ from clas_database import database_dict
 from class_courseManager import courseManager
 
 import sys
+
 sys.path.append('D:\\0tmpper\GitHub\python_learn\shiyanlou')
 
 class CmdManager(object):
     '界面控制程序的类'
-    def __init__(self,courseManager,database_dict):
+    def __init__(self,courseManager):
         print "正在生产界面控制程序"
-        self.main(courseManager,database_dict) ##界面针对指定的控制程序，与数据源做操作
+        self.main(courseManager) ##界面针对指定的控制程序，与数据源做操作
 
 
     def print_help_info(self):
@@ -24,6 +25,7 @@ class CmdManager(object):
         print "输入5，根据提示新增一个课程"
         print "输入6，根据提示删除课程"
         print "输入7，退出程序"
+        print "输入8，根据提示更新一个课程"
 
     def any_key_c(self):
          print " "
@@ -37,7 +39,7 @@ class CmdManager(object):
         self.any_key_c()
 
 
-    def main(self,courseManager,database_dict):
+    def main(self,courseManager):
      #主程序循环，通过if判断是否1-5，并执行对应的程序
      condition_1 = True
      while condition_1:
@@ -47,22 +49,28 @@ class CmdManager(object):
          int_choice = int(str_choice)
          if int_choice < 8 and int_choice > 0:
            if int_choice==1 :##打印出程序中存储的所有课程ID及课程名称
-             courseManager.print_all_course(database_dict)
+             courseManager.print_all_course()
            if int_choice==2 :##打印出课程数量
-             courseManager.get_coursenum(database_dict)
+             courseManager.get_coursenum()
            if int_choice==3:##打印出最长的课程名称与其ID
-             courseManager.print_longest(database_dict)
+             courseManager.print_longest()
            if int_choice==4:##删除最后一个课程并打印出剩余课程数量
-             courseManager.pop_newcourse(database_dict)
+             courseManager.pop_newcourse()
            if int_choice==5:##根据提示新增一个课程
              c_name=raw_input("请输入课程名字:")
              c_id=raw_input("请输入课程id:")
              c_create_date="2014-10-4"
              c_is_use='yes'
-             courseManager.in_up_cour(database_dict,course(c_id,c_name,c_create_date,c_name))
+             courseManager.in_cour(course(c_id,c_name,c_create_date,c_name))
+           if int_choice==8:##根据提示新增一个课程
+             c_name=raw_input("请输入课程名字:")
+             c_id=raw_input("请输入课程id:")
+             c_create_date="2014-10-4"
+             c_is_use='yes'
+             courseManager.in_cour(course(c_id,c_name,c_create_date,c_name))
            if int_choice==6:##根据提示删除课程
              d_id=raw_input("请输入要删除的课程id: ")
-             courseManager.del_course(database_dict,d_id)
+             courseManager.del_course(d_id)
            if int_choice==7:##退出程序
                 condition_1=False
                 exit()
