@@ -1,9 +1,10 @@
 # -*- coding: utf8 -*-
-#取得当前的中奖号码
+#模块化把网页中的前50个中奖号码抓出来
 __author__ = 'zr'
 
+
 import re
-import os
+
 
 txt_buff = open("c:\\Users\\zr\\Desktop\\ssq_test1.txt",'r')
 contents=''
