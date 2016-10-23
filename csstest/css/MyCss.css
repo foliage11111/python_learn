@@ -1,0 +1,28 @@
+h1{
+    color: red;font-size: 50px;
+    
+   text-indent: 5em;
+   text-align: center;
+}
+p{
+	color: red;
+	font-size: 40px
+}
+h2,h3{
+	color: green;
+font-size: 22px;
+text-indent: 3em;
+}
+
+body{color:blue;
+font-siez:14
+}
+
+li {
+color: black;
+}
+
+li strong{
+color: yellow;
+
+}
