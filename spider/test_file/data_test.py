@@ -3,8 +3,8 @@ __author__ = 'zr'
 #链接数据库测试用
 
 import cx_Oracle
-conn = cx_Oracle.connect('foliage/foliage@192.168.1.106/orcl')
-
+# conn = cx_Oracle.connect('foliage/foliage@192.168.1.106/orcl')
+conn = cx_Oracle.connect('foliage/foliage@local/orcl')
 #获取操作游标
 
 cursor = conn.cursor()

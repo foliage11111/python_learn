@@ -188,7 +188,7 @@ class database_dict(object):
 #     print str(k.id)+k.name
 #
 # data_con_dict.del_course_id(5)
-# data_con_dict.del_course(css)
+# data_con_dict.del_course(bootstrap)
 #
 # for k in data_con_dict.search_course_all():
 #     print str(k.id)+k.name

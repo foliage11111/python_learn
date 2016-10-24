@@ -47,7 +47,7 @@ def spider_main():
     response = get_ssq_by_spider(ssq_url)
     if response.getcode() == 200 and response:
         new50_list=ssq_filter(response)
-        #print new50_list
+        print new50_list
     else:
         print "数据抓取失败，不进行清洗"
 
