@@ -1,0 +1,40 @@
+body{
+   /*background-image:url("../css/WechatIMG51.jpeg");*/
+   background-repeat: no-repeat;
+}
+
+p{
+    width: 150px;
+    padding: 40px;
+    /*background-color: #0014ff;*/
+    outline-color: #31b0d5;
+    outline-width: 2px;
+    outline-style: solid;
+}
+table {
+    background-image: url("../css/WechatIMG51.jpeg");
+    background-size: 100%,100% ;
+    background-position: 100%;
+    border:solid;
+    border-collapse: collapse;
+    outline-style: dotted;
+    outline-color: #4cae4c;
+    outline-width: 10px;
+}
+
+table td{
+    border:solid;
+    border-collapse: collapse;
+}
+
+
+table tr.tr2 td{
+
+        color: red;
+    /*background-color: #B2FF99;*/
+}
+
+a:link {background-color:#B2FF99;}
+a:visited{background-color:#FFFF85;}
+a:hover{background-color:#FF704D;}
+a:active{background-color:#FF704D;}
